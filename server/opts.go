@@ -302,6 +302,12 @@ func (o *Options) ProcessConfigFile(configFile string) error {
 				o.WriteDeadline = time.Duration(v.(int64)) * time.Second
 				fmt.Printf("WARNING: write_deadline should be converted to a duration\n")
 			}
+		case "hick_hub_auth":
+			authOpts := v.(map[string]interface{})
+			apiURL := authOpts["api_url"].(string)
+			adminKey := authOpts["admin_key"].(string)
+
+			o.CustomClientAuthentication = NewHickHubAuth(apiURL, adminKey)
 		}
 	}
 	return nil
