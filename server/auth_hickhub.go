@@ -22,7 +22,7 @@ const subjectPath = "/user/messaging/subject"
 
 // NewHickHubAuth returns a new instance of the hickhub auth service.
 func NewHickHubAuth(apiURL, adminKey string) *HickHubAuth {
-	return &HickHubAuth{adminKey, apiURL}
+	return &HickHubAuth{apiURL, adminKey}
 }
 
 // Check checks whether the provided client authentication information should allow the user to connect
