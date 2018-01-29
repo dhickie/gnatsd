@@ -78,6 +78,7 @@ func (h *HickHubAuth) registerUser(c ClientAuthentication, authToken string) boo
 	if err != nil {
 		return false
 	}
+	defer resp.Body.Close()
 
 	subjectResponse := new(subjectResponse)
 	err = json.Unmarshal(body, subjectResponse)
