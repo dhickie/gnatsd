@@ -1038,9 +1038,7 @@ func (c *client) deliverMsg(sub *subscription, mh, msg []byte) {
 	// If this is a request, the recipient can't already publish to the reply subject
 	// and the recipient has permission to reply, add the reply inbox to the recipient's
 	// publish permissions temporarily
-	if c.pa.reply != nil && client.perms != nil &&
-		!client.perms.canPublish(string(c.pa.reply)) &&
-		client.perms.canReply(string(c.pa.subject)) {
+	if c.pa.reply != nil && !client.perms.canPublish(string(c.pa.reply)) && client.perms.canReply(string(c.pa.subject)) {
 		client.perms.addTemporaryPublishPermission(string(c.pa.reply))
 	}
 
