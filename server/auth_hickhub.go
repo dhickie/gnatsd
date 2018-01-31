@@ -41,9 +41,8 @@ func (h *HickHubAuth) Check(c ClientAuthentication) bool {
 
 func (h *HickHubAuth) registerAdmin(c ClientAuthentication) bool {
 	perms := new(Permissions)
-	perms.Publish = []string{"*"}
+	perms.Publish = []string{">"}
 	perms.Subscribe = []string{">"}
-	perms.Reply = []string{"*"}
 	user := &User{
 		Permissions: perms,
 	}
@@ -89,7 +88,7 @@ func (h *HickHubAuth) registerUser(c ClientAuthentication, authToken string) boo
 	// Register the user's permissions based on the valid subject response
 	perms := new(Permissions)
 	perms.Subscribe = []string{subjectResponse.Subject}
-	perms.Reply = []string{subjectResponse.Subject}
+	perms.Publish = []string{"*." + subjectResponse.Subject + ".reply"}
 	user := &User{
 		Permissions: perms,
 	}
